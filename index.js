@@ -1,27 +1,19 @@
-var fs = require('fs');
-var Discord = require('discord.js');
-var bot = new Discord.Client();
+const fs = require('fs');
+const Discord = require('discord.js');
+const fetch = require('node-fetch');
+const bot = new Discord.Client();
 
 const configFile = fs.readFileSync('./config.json', 'utf-8');
 
 const configData = JSON.parse(configFile);
 
-function getRandomMiku() {
-    var files = fs.readdirSync('./photos');
-    var item = "./photos/" + files[Math.floor(Math.random() * files.length)];
-    return item
-}
-
-bot.on('message', message => {
-    var prefix = '%'
+bot.on('message', async message => {
+    var prefix = '-'
     var msg = message.content;
 
     if (msg === prefix + 'miku') {
-        message.channel.send('Miku', {
-            files: [
-                getRandomMiku()
-            ]
-        });
+        const { username } = await fetch('https://plushmiku.xyz/api/random').then(response => response.json());
+        message.channel.send('https://plushmiku.xyz/' + username)
     }
 
     if (msg === prefix + 'help') {
