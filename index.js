@@ -19,6 +19,10 @@ bot.on('message', async message => {
     if (msg === prefix + 'help') {
         message.channel.send('Use "%miku" to send yourself a miku.');
     }
+
+    if (msg === prefix + 'guilds') {
+        message.channel.send(`Plush Miku is in ${bot.guilds.cache.size} servers!`)
+    }
 });
 
 bot.login(configData.token);
