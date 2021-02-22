@@ -13,7 +13,7 @@ bot.on('message', async message => {
 
     if (msg === prefix + 'miku') {
         const { username } = await fetch('https://plushmiku.xyz/api/random').then(response => response.json());
-        message.channel.send('https://plushmiku.xyz/' + username)
+        message.channel.send('https://plushmiku.xyz' + username)
     }
 
     if (msg === prefix + 'help') {
